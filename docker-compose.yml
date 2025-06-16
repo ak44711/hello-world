@@ -1,18 +1,15 @@
 services:
   hp-project:
-    image: maven:3.8.8-eclipse-temurin-17
+    image: maven:3.8.8-jdk-17  # 更换为稳定镜像
     volumes:
       - ./:/app
-    working_dir: /app
-    command: mvn spring-boot:run
+      - /root/.m2:/root/.m2  # 挂载Maven仓库缓存
+    workingdir: /app
+    command: mvn clean spring-boot:run
     ports:
       - "8090:8080"
-
-    networks:
-      - hp-test
     environment:
       - TZ=Asia/Shanghai
-
-networks:
-  hp-test:
-    driver: bridge
+      - MAVEN_OPTS="-Dmaven.repo.local=/root/.m2/repository -Duser.home=/root"
+    networks:
+      - hp-test

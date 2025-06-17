@@ -13,3 +13,7 @@ services:
       - MAVEN_OPTS="-Dmaven.repo.local=/root/.m2/repository -Duser.home=/root"
     networks:
       - hp-test
+  
+networks:
+  hp-test:
+    driver: bridge  # 使用默认的 bridge 网络驱动

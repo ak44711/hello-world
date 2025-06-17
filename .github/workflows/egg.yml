@@ -1,0 +1,19 @@
+name: Auto Deploy
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    deolpy:
+        runs-on: sef-Hosted
+
+        steps:
+            - name: Checkout code
+              run: |
+                sudo su -c "cd /root/hello-world &&  git pull origin master"
+
+            - name: 重启容器
+              run: |
+                sudo su -c "cd /root/hello-world && docker-compose restart"
+            

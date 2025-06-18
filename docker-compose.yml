@@ -1,6 +1,6 @@
 services:
   hp-project:
-    image: hello-world:latest  # 更换为稳定镜像
+    image: docker.m.daocloud.io/gitea/gitea:1.22.3-rootless
     volumes:
       - ./:/app
       - /root/.m2:/root/.m2  # 挂载Maven仓库缓存

@@ -1,19 +1,19 @@
 name: Auto Deploy
 on:
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - master
 
 jobs:
-    deolpy:
-        runs-on: self-hosted
+  deolpy:
+    runs-on: self-hosted
 
-        steps:
-            - name: Checkout code
-              run: |
-                sudo su -c "cd /root/hello-world &&  git pull origin master"
+    steps:
+      - name: Checkout code
+        run: |
+          sudo su -c "cd /root/hello-world &&  git pull origin master"
 
-            - name: 重启容器
-              run: |
-                sudo su -c "cd /root/hello-world && docker-compose restart"
+      - name: 重启容器
+        run: |
+          sudo su -c "cd /root/hello-world && docker-compose restart"
             

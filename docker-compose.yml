@@ -10,7 +10,7 @@ services:
       - "8090:8080"
     environment:
       - TZ=Asia/Shanghai
-      - MAVEN_OPTS="-Dmaven.repo.local=/root/.m2/repository -Duser.home=/root"
+      - MAVEN_OPTS='-Dmaven.repo.local=/root/.m2/repository -Duser.home=/root'
     networks:
       - hp-test
   

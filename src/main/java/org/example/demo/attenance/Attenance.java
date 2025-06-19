@@ -14,6 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class Attenance {
     @GetMapping("/list")
     public String hello() {
-        return "ffff";
+        return "xxx";
     }
 }

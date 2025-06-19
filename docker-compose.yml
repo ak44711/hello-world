@@ -2,16 +2,21 @@ services:
   hp-project:
     image: maven:3.8.8-eclipse-temurin-17
     volumes:
-      - ./:/app
-      - /root/.m2:/root/.m2  # 挂载Maven仓库缓存
-    working_dir: /app
-    command: mvn clean spring-boot:run
+      - ./:/app # 将当前目录挂载到容器内的 /app 目录，方便在容器中访问本地代码。
+      - /root/.m2:/root/.m2  # 将本地 Maven 仓库缓存挂载到容器内的 /root/.m2，避免每次构建都重新下载依赖。
+    working_dir: /app # 设置容器内的工作目录为 /app，即挂载的代码目录。
+    command: mvn clean spring-boot:run # 容器启动时执行的命令：清理项目并运行 Spring Boot 应用。
     ports:
-      - "8090:8080"
+      - "8090:8080" # 将容器内的 8080 端口映射到宿主机的 8090 端口，方便通过 localhost:8090 访问服务。
     environment:
+
+      # 设置时区为上海，并配置 Maven 的本地仓库路径。
       - TZ=Asia/Shanghai
+
+      # 指定 Maven 本地仓库路径。 设置用户主目录为 /root。
       - MAVEN_OPTS=-Dmaven.repo.local=/root/.m2/repository -Duser.home=/root
     networks:
+      # 将服务加入名为 hp-test 的网络
       - hp-test
   
 networks:

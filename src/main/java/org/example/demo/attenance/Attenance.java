@@ -16,4 +16,8 @@ public class Attenance {
     public String hello() {
         return "helloworld";
     }
+    @GetMapping("/hellohp")
+    public String hellohp() {
+        return "hellohp";
+    }
 }

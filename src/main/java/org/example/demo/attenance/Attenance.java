@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/hello")
 public class Attenance {
-    @GetMapping("/hello")
+    @GetMapping("/helloworld")
     public String hello() {
         return "helloworld";
     }

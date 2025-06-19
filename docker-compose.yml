@@ -1,6 +1,6 @@
 services:
   hp-project:
-    image: custom-maven:latest
+    image: maven:3.8.8-eclipse-temurin-17
     volumes:
       - ./:/app
       - /root/.m2:/root/.m2  # 挂载Maven仓库缓存

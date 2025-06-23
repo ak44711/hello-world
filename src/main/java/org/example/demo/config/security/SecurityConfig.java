@@ -48,6 +48,9 @@ public class SecurityConfig {
                 // 允许直接访问授权登录接口
                 .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/experienceUser/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/experienceUser/login").permitAll()
+                .requestMatchers(HttpMethod.GET, "/experienceUser/getVerificationCode").permitAll()
                 .requestMatchers(HttpMethod.POST, "/user/resetLimit").permitAll()
 
                 // 允许 SpringMVC 的默认错误地址匿名访问

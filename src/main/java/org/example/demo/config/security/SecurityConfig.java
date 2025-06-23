@@ -37,24 +37,25 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
-                .formLogin(AbstractHttpConfigurer::disable)
-                .logout(AbstractHttpConfigurer::disable)
-                .httpBasic(AbstractHttpConfigurer::disable)
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests((authorizeRequests -> authorizeRequests
-                        // 允许所有OPTIONS请求
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        // 允许直接访问授权登录接口
-                        .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
+            .cors(AbstractHttpConfigurer::disable)
+            .formLogin(AbstractHttpConfigurer::disable)
+            .logout(AbstractHttpConfigurer::disable)
+            .httpBasic(AbstractHttpConfigurer::disable)
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests((authorizeRequests -> authorizeRequests
+                // 允许所有OPTIONS请求
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                // 允许直接访问授权登录接口
+                .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
+                .requestMatchers(HttpMethod.POST, "/user/resetLimit").permitAll()
 
-                        // 允许 SpringMVC 的默认错误地址匿名访问
-                        .requestMatchers("/error").permitAll()
-                        // 除上面外的所有请求全部需要鉴权认证
-                        .anyRequest().authenticated()))
-                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-                .authenticationProvider(authenticationProvider());
+                // 允许 SpringMVC 的默认错误地址匿名访问
+                .requestMatchers("/error").permitAll()
+                // 除上面外的所有请求全部需要鉴权认证
+                .anyRequest().authenticated()))
+            .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+            .authenticationProvider(authenticationProvider());
         return http.build();
     }
 

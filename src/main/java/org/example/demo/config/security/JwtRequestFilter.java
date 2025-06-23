@@ -46,6 +46,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         // 允许 /api/user/login 和 /api/user/register 通过，不需要 JWT 认证
         if (   requestURI.endsWith("/user/login")
                 || requestURI.endsWith("/user/register")
+                || requestURI.endsWith("/user/resetLimit")
 
         ) {
             chain.doFilter(request, response);

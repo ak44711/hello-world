@@ -50,6 +50,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 || requestURI.endsWith("/experienceUser/register")
                 || requestURI.endsWith("/experienceUser/login")
                 || requestURI.endsWith("/experienceUser/getVerificationCode")
+                || requestURI.endsWith("/experienceUser/deleteById")
 
         ) {
             chain.doFilter(request, response);

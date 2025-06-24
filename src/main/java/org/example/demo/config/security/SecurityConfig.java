@@ -51,6 +51,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/experienceUser/register").permitAll()
                 .requestMatchers(HttpMethod.POST, "/experienceUser/login").permitAll()
                 .requestMatchers(HttpMethod.GET, "/experienceUser/getVerificationCode").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/experienceUser/deleteById").permitAll()
                 .requestMatchers(HttpMethod.POST, "/user/resetLimit").permitAll()
 
                 // 允许 SpringMVC 的默认错误地址匿名访问

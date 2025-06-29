@@ -53,17 +53,16 @@ public class JwtUtil {
 
     public static String generateToken(String subject) {
         return Jwts.builder()
-                .id(JWT_ID)
-                .subject(subject)
+                .id(JWT_ID) // "JWT"
+                .subject(subject) // {"id":"3d0316e41ffef3733b3555452471347b"}
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + JWT_TTL)) // 1小时后过期
+                .expiration(new Date(System.currentTimeMillis() + JWT_TTL)) // 1小时后过期 36000000
                 .signWith(getKey()).compact();
     }
 
     public static Boolean validateToken(String token, String id) {
         final Long userId = extractUserId(token);
         return id.equals(String.valueOf(userId)) && !isTokenExpired(token);
-
     }
 
 }

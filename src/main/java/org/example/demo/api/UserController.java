@@ -3,9 +3,11 @@ package org.example.demo.api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.demo.common.util.ResponseUtil;
+import org.example.demo.domain.dto.LoginUserDto;
 import org.example.demo.domain.dto.RegisterUserDto;
 import org.example.demo.domain.emuns.ResponseEnum;
 import org.example.demo.domain.entity.User;
+import org.example.demo.domain.vo.LoginUserVO;
 import org.example.demo.domain.vo.RegisterUserVO;
 import org.example.demo.domain.vo.ResponseVO;
 import org.example.demo.exception.CustomException;
@@ -38,15 +40,12 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseVO<RegisterUserVO> register(@RequestBody @Valid RegisterUserDto registerUserDto) {
-        Long count = redisTemplate.opsForValue().increment(REGISTER_LIMIT_KEY);
-        if(count == 1) {
-            redisTemplate.expire(REGISTER_LIMIT_KEY, LIMIT_WINDOW_SECONDS, TimeUnit.SECONDS);
-        }
-        if(count > REGISTER_LIMIT) {
-            throw new CustomException(ResponseEnum.BAD_REQUEST, "注册人数已满");
-        }
-
         return ResponseUtil.success(userService.register(registerUserDto));
+    }
+
+    @PostMapping("/login")
+    public ResponseVO<LoginUserVO> login(@RequestBody @Valid LoginUserDto loginUserDto) {
+        return ResponseUtil.success(userService.login(loginUserDto));
     }
 
     @PostMapping("/resetLimit")

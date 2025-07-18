@@ -6,5 +6,5 @@ import lombok.Data;
 public class RegisterUserVO {
     private String id;
     private String username;
-    private String phone;
+//    private String phone;
 }

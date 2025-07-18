@@ -39,19 +39,11 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
         final String requestURI = request.getRequestURI();
         final String authorizationHeader = request.getHeader("Authorization");
-        if((requestURI.startsWith("/api/attendance")) ) {
-            chain.doFilter(request, response);
-            return;
-        }
+
         // 允许 /api/user/login 和 /api/user/register 通过，不需要 JWT 认证
         if (   requestURI.endsWith("/user/login")
                 || requestURI.endsWith("/user/register")
-                || requestURI.endsWith("/user/resetLimit")
-                || requestURI.endsWith("/experienceUser/register")
-                || requestURI.endsWith("/experienceUser/login")
-                || requestURI.endsWith("/experienceUser/getVerificationCode")
-                || requestURI.endsWith("/experienceUser/deleteById")
-
+                || requestURI.startsWith("/ws/chat")
         ) {
             chain.doFilter(request, response);
             return;
@@ -64,7 +56,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 return;
             }
 
-            Long userId = JwtUtil.extractUserId(authorizationHeader);
+            String userId = JwtUtil.extractUserId(authorizationHeader);
             UserContextUtil.setUserId(userId);
             if (userId == null) {
                 log.warn("JWT 不包含有效的 userId");

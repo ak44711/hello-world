@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.demo.mapper.IChatMapper">
+    <select id="queryChats" resultType="org.example.demo.domain.vo.ChatHistoryVO">
+        <![CDATA[
+        SELECT
+            chat.id AS chatId,
+            user.username,
+            chat.role,
+            chat.create_at,
+            message.content
+        FROM chat
+        LEFT JOIN user ON chat.user_id = user.id
+        LEFT JOIN message ON chat.message_id = message.id
+        WHERE 1=1
+        ]]>
+        <if test="username != null and username != ''">
+            AND user.username = #{username}
+        </if>
+        <if test="chatId != null">
+            AND chat.id = #{chatId}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            AND chat.create_at &gt;= #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            AND chat.create_at &lt;= #{endTime}
+        </if>
+    </select>
+</mapper>

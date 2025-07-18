@@ -29,8 +29,8 @@ public class JwtUtil {
     }
 
 
-    public static Long extractUserId(String token) {
-        return JSONObject.parseObject(extractClaim(token, Claims::getSubject)).getLong("id");
+    public static String extractUserId(String token) {
+        return JSONObject.parseObject(extractClaim(token, Claims::getSubject)).getString("id");
     }
 
     public static Date extractExpiration(String token) {
@@ -48,7 +48,15 @@ public class JwtUtil {
     }
 
     private static Boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+        try{
+            boolean isExpired = extractExpiration(token).before(new Date());
+            return isExpired;
+        } catch (Exception e) {
+            // 捕获所有 JWT 异常，包括过期
+            
+            return true;
+        }
+        
     }
 
     public static String generateToken(String subject) {
@@ -61,8 +69,13 @@ public class JwtUtil {
     }
 
     public static Boolean validateToken(String token, String id) {
-        final Long userId = extractUserId(token);
+        final String userId = extractUserId(token);
         return id.equals(String.valueOf(userId)) && !isTokenExpired(token);
+    }
+
+    public static Boolean validateToken(String token) {
+//        final Long userId = extractUserId(token);
+        return  !isTokenExpired(token);
     }
 
 }

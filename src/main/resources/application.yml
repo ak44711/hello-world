@@ -1,0 +1,22 @@
+coze:
+  botid: "7513034488533336103"
+  token: "pat_B0bSbynEbhk05M8wjzewm7B29pOxf2NfdkPd7LGdSb0ZKysI3e0SdBFad63zHujU"
+  base_url: "https://api.coze.cn/v3/chat"
+
+spring:
+  application:
+    name: demo
+  datasource:
+    url: jdbc:mysql://47.116.161.116:3306/helloworld?useSSL=false&serverTimezone=UTC
+    username: helloworld
+    password: HN57HZMtB4Ghb57n
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  data:
+    redis:
+      host: 47.116.161.116
+      port: 6379
+      password: 063618
+
+mybatis-plus:
+  mapper-locations: classpath:xml/*.xml

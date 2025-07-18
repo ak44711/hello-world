@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
         JSONObject tokenData = new JSONObject();
         tokenData.put("id", user.getId());
         tokenData.put("username", loginUserDTO.getUsername());
-        tokenData.put("role", "admin");
+//        tokenData.put("role", "admin");
         String token = JwtUtil.generateToken(JSON.toJSONString(tokenData));
 
         LoginUserVO vo = new LoginUserVO();

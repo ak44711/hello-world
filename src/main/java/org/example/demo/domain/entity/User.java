@@ -28,9 +28,6 @@ public class User {
     @TableField("password")
     private String password;
 
-    @TableField("phone")
-    private String phone;
-
     @TableLogic
     private Integer deleted;
 }

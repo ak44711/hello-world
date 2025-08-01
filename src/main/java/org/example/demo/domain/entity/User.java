@@ -17,10 +17,10 @@ import java.util.UUID;
 // 提供 Builder 模式，可以通过链式调用的方式创建对象
 @Builder
 // MyBatis-Plus 注解 指定数据库表名为 user。
-@TableName("user")
+@TableName("user_copy1")
 public class User {
-    @TableId(type = IdType.ASSIGN_UUID)
-    private String id;
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     @TableField("username")
     private String username;

@@ -49,7 +49,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/user/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
                 .requestMatchers(HttpMethod.POST, "/user/resetLimit").permitAll()
-
+                .requestMatchers("/reference-data/**").permitAll()
                 // 允许 SpringMVC 的默认错误地址匿名访问
                 .requestMatchers("/error").permitAll()
                 // 除上面外的所有请求全部需要鉴权认证

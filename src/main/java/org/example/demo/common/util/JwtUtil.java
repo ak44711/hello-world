@@ -29,8 +29,8 @@ public class JwtUtil {
     }
 
 
-    public static String extractUserId(String token) {
-        return JSONObject.parseObject(extractClaim(token, Claims::getSubject)).getString("id");
+    public static Long extractUserId(String token) {
+        return JSONObject.parseObject(extractClaim(token, Claims::getSubject)).getLong("id");
     }
 
     public static Date extractExpiration(String token) {
@@ -69,7 +69,7 @@ public class JwtUtil {
     }
 
     public static Boolean validateToken(String token, String id) {
-        final String userId = extractUserId(token);
+        final Long userId = extractUserId(token);
         return id.equals(String.valueOf(userId)) && !isTokenExpired(token);
     }
 

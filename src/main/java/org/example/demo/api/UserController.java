@@ -47,10 +47,4 @@ public class UserController {
     public ResponseVO<LoginUserVO> login(@RequestBody @Valid LoginUserDto loginUserDto) {
         return ResponseUtil.success(userService.login(loginUserDto));
     }
-
-    @PostMapping("/resetLimit")
-    public ResponseVO<String> resetRegisterLimit() {
-        redisTemplate.delete(REGISTER_LIMIT_KEY);
-        return ResponseUtil.success("true");
-    }
 }

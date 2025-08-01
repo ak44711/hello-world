@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        User user = userMapper.selectById(Long.parseLong(userId));
+        User user = userMapper.selectById(userId);
         // 将User转换为Spring Security的UserDetails
         return new org.springframework.security.core.userdetails.User
                 (String.valueOf(user.getId()), user.getPassword(), getAuthorities(user));
